@@ -25,7 +25,6 @@ private int id ;
   private String  passwords;  // passwords  varchar(255)  not null
   private String  numbers;    //  numbers varchar(255)
 
-  private String  gender;
 public String getName() {
     return name;
 }

@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class user {
 
  
-    private final JdbcTemplate jdbcT ;
+    // private final JdbcTemplate jdbcT ;
     
-    //  CONSTRUCTORE INJECT 
-     user(JdbcTemplate jdbcT  ){
-        this.jdbcT = jdbcT; 
-     }
+    private final  Repository repository ;
+    //  CONSTRUCTORE INJECT  
+    //  user(JdbcTemplate jdbcT    ){
+    //     this.jdbcT = jdbcT; 
+    //  }
+
+      user(Repository repository){
+        this.repository = repository ;
+      }
 
  @GetMapping("/welcome")
     public String welcome(){
@@ -31,9 +36,10 @@ public class user {
     public userModel postMethodName(@RequestBody userModel user) {
         
         //  sql queary 
-  String sql = "INSERT INTO users(user_name, numbers, email_id , passwords) VALUES (?, ?, ?, ?)";
+//   String sql = "INSERT INTO users(user_name, numbers, email_id , passwords) VALUES (?, ?, ?, ?)";
 
-  jdbcT.update(sql  , user.getName() ,user.getNumbers() , user.getMail() , user.getPasswords());
+//   jdbcT.update(sql  , user.getName() ,user.getNumbers() , user.getMail() , user.getPasswords());
+repository.save(user);
   System.out.println(user.getName() );
   System.out.println(user.getPasswords());
         return user;
