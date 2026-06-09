@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -72,4 +74,66 @@ repository.deleteById(id);
 } 
 
     
+
+@PutMapping("path/{id}")
+public  String  putMethodName(@PathVariable Integer id, @RequestBody userModel RequestUser) {
+
+//  sab se phele to mujhe fetch karni chaiye 
+// vivek patwa , 89898 , 68 ,
+
+// repository.save(user);   /// save 
+
+ Optional<userModel> users=   repository.findById(id) ;
+        
+ 
+ if (users.isPresent()) {
+   
+  userModel  person =    users.get();
+   
+  person.setMail(RequestUser.getMail());
+  person.setName(RequestUser.getName());
+  person.setNumbers(RequestUser.getNumbers());
+  person.setPasswords(RequestUser.getPasswords());
+  repository.save(person);
+ }
+
+
+/*
+old 
+{
+    "mail": "rahul@gmail.com",  || rahulkumer@gmail.com 
+    "name": "Rahul Kumar",
+    "numbers": "9876543210",  || 676767676766 
+    "passwords": "rahul123"
+}
+
+new 
+
+
+
+{ real 
+    "mail": "rahulkumer@gmail.com",
+    "name": "Rahul Kumar",
+    "numbers": "676767676766",
+    "passwords": "rahul123"
+}
+
+*/
+
+
+
+
+// {
+
+//   name : "vivke patwa",
+//   number : 8989,
+//   age : 21,
+// }
+return " VALUE UPDATE SUCCESSFUL " ;
+
+}
+
+
+
+
 }
