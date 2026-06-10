@@ -1,4 +1,4 @@
-package com.project.aiSaas;
+package com.project.aiSaas.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
