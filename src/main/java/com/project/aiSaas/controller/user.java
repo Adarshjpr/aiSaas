@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.aiSaas.repository.Repository;
+import com.project.aiSaas.service.serviceLogic.UserLogic;
 import com.project.aiSaas.service.servieInterface.UserInterface;
+
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +34,11 @@ public class user {
 
  
     // private final JdbcTemplate jdbcT ;
-    @Autowired
-private UserInterface userInterface;
+    // @Autowired
+// private UserInterface userInterface;
+
+@Autowired
+private   UserLogic userLogic;
     private final  Repository repository ;
     //  CONSTRUCTORE INJECT  
     //  user(JdbcTemplate jdbcT    ){
@@ -52,14 +58,14 @@ private UserInterface userInterface;
     
 
     @PostMapping("/register")
-    public ResponseUserDto  postMethodName(@RequestBody RequestUserDto user) {
+    public ResponseUserDto  postMethodName( @Valid   @RequestBody RequestUserDto user) {
         
         //  sql queary 
 //   String sql = "INSERT INTO users(user_name, numbers, email_id , passwords) VALUES (?, ?, ?, ?)";
 
 //   jdbcT.update(sql  , user.getName() ,user.getNumbers() , user.getMail() , user.getPasswords());
 
-        return userInterface.UserPost(user);
+        return userLogic.UserPost(user);
     }
     
 

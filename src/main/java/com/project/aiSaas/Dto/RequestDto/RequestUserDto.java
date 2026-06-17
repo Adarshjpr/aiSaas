@@ -1,17 +1,30 @@
 package com.project.aiSaas.Dto.RequestDto;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 
 public class RequestUserDto {
 
-
+@NotBlank(message = "Username cannot be blank")
      private String name;    //   usernams varchar(255)
 
+     @Email(message = "Invalid email format")
+    @NotBlank(message = "Email is required")
   private String mail;     // mail varchar(255) unquie 
 
   private String  passwords;  // passwords  varchar(255)  not null
+  
   private String  numbers;
+  public RequestUserDto() {
+  }
+  public RequestUserDto(String name, String mail, String passwords, String numbers) {
+    this.name = name;
+    this.mail = mail;
+    this.passwords = passwords;
+    this.numbers = numbers;
+  }
   public String getName() {
     return name;
   }
