@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.aiSaas.repository.Repository;
 import com.project.aiSaas.service.serviceLogic.UserLogic;
 import com.project.aiSaas.service.servieInterface.UserInterface;
+import com.project.aiSaas.utilty.JwtService;
 
 import jakarta.validation.Valid;
 
@@ -49,7 +50,7 @@ private   UserLogic userLogic;
         this.repository = repository ;
       }
 
- @GetMapping("/welcome")
+ @GetMapping("/public/welcome")
     public String welcome(){
 
         return" welcome vivek" ;
@@ -57,7 +58,7 @@ private   UserLogic userLogic;
  
     
 
-    @PostMapping("/register")
+    @PostMapping("/public/register")
     public ResponseUserDto  postMethodName( @Valid   @RequestBody RequestUserDto user) {
         
         //  sql queary 
@@ -71,7 +72,7 @@ private   UserLogic userLogic;
 
 //  get api 
 
-@GetMapping("/get/{id}")
+@GetMapping("/private/get/{id}")
 public List<userModel> getMethodName(  @PathVariable Integer id ) {
    
  return  repository.findAll();
@@ -79,7 +80,7 @@ public List<userModel> getMethodName(  @PathVariable Integer id ) {
 }
 
 
-@DeleteMapping("/delete/{id}")
+@DeleteMapping("/private/delete/{id}")
 public String  Deletedata(@PathVariable  Integer id){
   
 repository.deleteById(id);
@@ -89,7 +90,7 @@ repository.deleteById(id);
 
     
 
-@PutMapping("path/{id}")
+@PutMapping("/private/path/{id}")
 public  String  putMethodName(@PathVariable Integer id, @RequestBody userModel RequestUser) {
 
 //  sab se phele to mujhe fetch karni chaiye 

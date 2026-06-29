@@ -10,6 +10,7 @@ import com.project.aiSaas.Dto.ResponseDto.ResponseUserDto;
 import com.project.aiSaas.model.userModel;
 import com.project.aiSaas.repository.Repository;
 import com.project.aiSaas.service.servieInterface.UserInterface;
+import com.project.aiSaas.utilty.JwtService;
 
 @Service
 public class UserLogic implements UserInterface {
@@ -21,20 +22,15 @@ public class UserLogic implements UserInterface {
 
     @Override
  public  ResponseUserDto UserPost(RequestUserDto user) {
-userModel  userM = new userModel();
 
-userM.setName(user.getName());
-userM.setMail(user.getMail());
-userM.setNumbers(user.getNumbers());
-userM.setPasswords(user.getPasswords());
-repository.save(userM);
- 
+
+ userModel.builder().mail(user.getMail()).numbers(user.getNumbers()).name(user.getName()).passwords(user.getPasswords()).build();
 ResponseUserDto  responseUserDto = new ResponseUserDto();
 
 responseUserDto.setMail(user.getMail());
 responseUserDto.setName(user.getName());
 
-    
+    JwtService.createToken(user.getMail());
   
   return responseUserDto ;
  }
