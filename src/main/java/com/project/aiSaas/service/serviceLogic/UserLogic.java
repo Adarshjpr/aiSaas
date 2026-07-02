@@ -15,13 +15,20 @@ import com.project.aiSaas.utilty.JwtService;
 @Service
 public class UserLogic implements UserInterface {
 
+    private final JwtService jwtService;
     @Autowired
  private Repository repository;
 
 
 
+    UserLogic(JwtService jwtService) {
+        this.jwtService = jwtService;
+    }
+
+
+
     @Override
- public  ResponseUserDto UserPost(RequestUserDto user) {
+ public  String UserPost(RequestUserDto user) {
 
 
  userModel.builder().mail(user.getMail()).numbers(user.getNumbers()).name(user.getName()).passwords(user.getPasswords()).build();
@@ -30,9 +37,9 @@ ResponseUserDto  responseUserDto = new ResponseUserDto();
 responseUserDto.setMail(user.getMail());
 responseUserDto.setName(user.getName());
 
-    JwtService.createToken(user.getMail());
+   String token =  JwtService.createToken(user.getMail()) ;
   
-  return responseUserDto ;
+  return  jwtService.extrClaimsMail(token) ;
  }
 
 }

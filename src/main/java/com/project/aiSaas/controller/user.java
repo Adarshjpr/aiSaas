@@ -59,7 +59,7 @@ private   UserLogic userLogic;
     
 
     @PostMapping("/public/register")
-    public ResponseUserDto  postMethodName( @Valid   @RequestBody RequestUserDto user) {
+    public String  postMethodName( @Valid   @RequestBody RequestUserDto user) {
         
         //  sql queary 
 //   String sql = "INSERT INTO users(user_name, numbers, email_id , passwords) VALUES (?, ?, ?, ?)";

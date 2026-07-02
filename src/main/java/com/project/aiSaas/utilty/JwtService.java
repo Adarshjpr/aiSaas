@@ -8,6 +8,7 @@ import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.InvalidKeyException;
@@ -36,4 +37,16 @@ public class JwtService {
                 .signWith(getSigningKey(), Jwts.SIG.HS256) // Securely sign the token
                 .compact();
     }
+
+
+   
+
+public String extrClaimsMail( String token){
+
+
+
+    return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload().getSubject();
+}
+
+
 }
