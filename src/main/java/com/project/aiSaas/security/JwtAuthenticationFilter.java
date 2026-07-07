@@ -48,11 +48,9 @@ private UserDetailsService  userDetailsService;
         if(email !=null && SecurityContextHolder.getContext().getAuthentication()== null){
 
 
-            UserDetails userDetails =  userDetailsService.loadUserByUsername(email);
-            //  select * from  where email = ?
-//  username  , user role
 
- UsernamePasswordAuthenticationToken authenticationToken =  new UsernamePasswordAuthenticationToken(userDetails , null , userDetails.getAuthorities());
+
+ UsernamePasswordAuthenticationToken authenticationToken =  new UsernamePasswordAuthenticationToken(email , null ,java.util.Collections.emptyList());
 
 
 SecurityContextHolder.getContext().setAuthentication(authenticationToken);

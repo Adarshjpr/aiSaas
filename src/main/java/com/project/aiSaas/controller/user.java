@@ -50,7 +50,7 @@ private   UserLogic userLogic;
         this.repository = repository ;
       }
 
- @GetMapping("/public/welcome")
+ @GetMapping("/private/welcome")
     public String welcome(){
 
         return" welcome vivek" ;
