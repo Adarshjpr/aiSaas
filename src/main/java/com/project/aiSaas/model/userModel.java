@@ -2,6 +2,8 @@ package com.project.aiSaas.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,6 +37,8 @@ private int id ;
   private String  passwords;  // passwords  varchar(255)  not null
   private String  numbers;    //  numbers varchar(255)
 
+  @Enumerated(EnumType.STRING)
+  private  Roles role ;
 
   // 
 

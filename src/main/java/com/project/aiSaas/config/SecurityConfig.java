@@ -27,6 +27,8 @@ public SecurityFilterChain securityFilterChain(HttpSecurity request){
     System.out.println("request for a user " + request);
 request.csrf(csrf -> csrf.disable())
   .authorizeHttpRequests(auth -> auth.requestMatchers("/public/**").permitAll()
+  .requestMatchers("/admin/**").hasRole("ADMIN")
+    .requestMatchers("/user/**").hasRole("USER")
   .requestMatchers("/private/**").authenticated()
   
   ) .httpBasic(Customizer.withDefaults())

@@ -37,7 +37,7 @@ ResponseUserDto  responseUserDto = new ResponseUserDto();
 responseUserDto.setMail(user.getMail());
 responseUserDto.setName(user.getName());
 
-   return JwtService.createToken(user.getMail()) ;
+   return JwtService.createToken(user.getMail(), user.getRole()) ;
 
  }
 

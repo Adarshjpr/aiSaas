@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 // import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -50,10 +52,10 @@ private   UserLogic userLogic;
         this.repository = repository ;
       }
 
- @GetMapping("/private/welcome")
+ @GetMapping("/User/welcome")
     public String welcome(){
 
-        return" welcome vivek" ;
+        return" welcome user dashboard" ;
     }
  
     
@@ -148,6 +150,11 @@ return " VALUE UPDATE SUCCESSFUL " ;
 
 }
 
+
+@GetMapping("/admin/Dasboard")
+public String getMethodName() {
+        return" welcome Admin dashboard" ;
+}
 
 
 

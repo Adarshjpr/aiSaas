@@ -1,9 +1,11 @@
 package com.project.aiSaas.security;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,8 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 @Autowired
 private  JwtService jService;
 
-@Autowired
-private UserDetailsService  userDetailsService;
+
 
 
     @Override
@@ -47,10 +48,12 @@ private UserDetailsService  userDetailsService;
 
         if(email !=null && SecurityContextHolder.getContext().getAuthentication()== null){
 
+// inmemory 
+String role=   jService.extrClaims(token);
 
-
-
- UsernamePasswordAuthenticationToken authenticationToken =  new UsernamePasswordAuthenticationToken(email , null ,java.util.Collections.emptyList());
+   List<SimpleGrantedAuthority> authrization  = List.of(new SimpleGrantedAuthority(role));
+ 
+ UsernamePasswordAuthenticationToken authenticationToken =  new UsernamePasswordAuthenticationToken(email , null ,authrization);
 
 
 SecurityContextHolder.getContext().setAuthentication(authenticationToken);

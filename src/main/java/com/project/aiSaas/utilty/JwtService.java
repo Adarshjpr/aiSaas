@@ -28,16 +28,32 @@ public class JwtService {
 //getSigningKey()  userndefine name ??
 // Decoders.BASE64.decode
 
- public static String createToken(String email) throws InvalidKeyException {
+ public static String createToken(String email , String Role) throws InvalidKeyException {
 
         return Jwts.builder()
                 .subject(email)
+                .claim("ROLE", Role )
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis()+ 60000*15))
                 .signWith(getSigningKey(), Jwts.SIG.HS256) // Securely sign the token
                 .compact();
     }
 
+    /*
+    
+    {
+    subject :email
+    ROLE :Role
+    
+    }
+    
+    */
+public String extrClaims( String token){
+
+
+
+    return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload().get("ROLE" ,String.class);
+}
 
    
 
