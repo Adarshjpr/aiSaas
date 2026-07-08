@@ -20,7 +20,7 @@ this.jFilter =jFilter ;
     }
 
     @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity request){
+public SecurityFilterChain securityFilterChain(HttpSecurity request) throws Exception{
 
   
 
