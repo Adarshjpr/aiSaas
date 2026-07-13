@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.aiSaas.Dto.RequestDto.RequestUserDto;
 import com.project.aiSaas.Dto.ResponseDto.ResponseUserDto;
+import com.project.aiSaas.model.Roles;
 import com.project.aiSaas.model.userModel;
 import com.project.aiSaas.repository.Repository;
 import com.project.aiSaas.service.servieInterface.UserInterface;
@@ -30,8 +31,15 @@ public class UserLogic implements UserInterface {
     @Override
  public  String UserPost(RequestUserDto user) {
 
+ Roles role;
+        try {
+            role = Roles.valueOf(user.getRole().toUpperCase());
+        } catch (Exception e) {
+            role = Roles.USER;
+        }
+   userModel userModelSave =  userModel.builder().mail(user.getMail()).numbers(user.getNumbers()).name(user.getName()).passwords(user.getPasswords()).role(role).build();
 
- userModel.builder().mail(user.getMail()).numbers(user.getNumbers()).name(user.getName()).passwords(user.getPasswords()).build();
+   repository.save(userModelSave);
 ResponseUserDto  responseUserDto = new ResponseUserDto();
 
 responseUserDto.setMail(user.getMail());

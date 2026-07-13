@@ -26,10 +26,13 @@ public SecurityFilterChain securityFilterChain(HttpSecurity request) throws Exce
 
     System.out.println("request for a user " + request);
 request.csrf(csrf -> csrf.disable())
-  .authorizeHttpRequests(auth -> auth.requestMatchers("/public/**").permitAll()
-  .requestMatchers("/admin/**").hasRole("ADMIN")
-    .requestMatchers("/user/**").hasRole("USER")
-  .requestMatchers("/private/**").authenticated()
+     .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/public/**").permitAll()
+                .requestMatchers("/userRegister").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/User/**").hasRole("USER")
+                .requestMatchers("/private/**").authenticated()
+                .anyRequest().authenticated()
   
   ) .httpBasic(Customizer.withDefaults())
   .addFilterBefore(jFilter ,  UsernamePasswordAuthenticationFilter.class);

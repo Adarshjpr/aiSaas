@@ -60,7 +60,7 @@ private   UserLogic userLogic;
  
     
 
-    @PostMapping("/public/register")
+    @PostMapping("/userRegister")
     public String  postMethodName( @Valid   @RequestBody RequestUserDto user) {
         
         //  sql queary 

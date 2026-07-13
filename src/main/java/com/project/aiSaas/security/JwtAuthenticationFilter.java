@@ -44,14 +44,15 @@ private  JwtService jService;
 
         String token = authHeader.substring(7);
 
-        String email = jService.extrClaimsMail(token);
+        String email = jService.extrClaims(token);
 
         if(email !=null && SecurityContextHolder.getContext().getAuthentication()== null){
 
 // inmemory 
 String role=   jService.extrClaims(token);
-
-   List<SimpleGrantedAuthority> authrization  = List.of(new SimpleGrantedAuthority(role));
+System.out.println("role " + role);
+ List<SimpleGrantedAuthority> authrization =
+    List.of(new SimpleGrantedAuthority("ROLE_" + role));
  
  UsernamePasswordAuthenticationToken authenticationToken =  new UsernamePasswordAuthenticationToken(email , null ,authrization);
 

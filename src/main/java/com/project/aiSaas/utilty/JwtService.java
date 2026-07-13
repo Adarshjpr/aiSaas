@@ -8,6 +8,8 @@ import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Component;
 
+import com.project.aiSaas.model.Roles;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -32,7 +34,7 @@ public class JwtService {
 
         return Jwts.builder()
                 .subject(email)
-                .claim("ROLE", Role )
+              .claim("ROLE", Role) 
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis()+ 60000*15))
                 .signWith(getSigningKey(), Jwts.SIG.HS256) // Securely sign the token
