@@ -49,4 +49,15 @@ responseUserDto.setName(user.getName());
 
  }
 
+
+public userModel entrollment( Integer id){
+
+
+      userModel u = repository.findbyInegerId(id).orElseThrow(()-> new RuntimeException("id not found"));
+u.getEnrollment().setEntrollment("uc/26");
+    return  u;
+}
+
+
+
 }

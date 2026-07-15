@@ -9,6 +9,7 @@ import com.project.aiSaas.Dto.ResponseDto.ResponseUserDto;
 import com.project.aiSaas.model.userModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 // import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -150,11 +151,29 @@ return " VALUE UPDATE SUCCESSFUL " ;
 
 }
 
-
+// @PreAuthorize()
 @GetMapping("/admin/Dasboard")
 public String getMethodName() {
         return" welcome Admin dashboard" ;
 }
+
+
+
+
+@PostMapping("/User/enrollment/{id}")
+public userModel postMethodName(@PathVariable Integer id ) {
+   
+    System.out.println("id  , " + id);
+    return userLogic.entrollment(id) ;
+}
+
+ 
+
+
+
+
+
+
 
 
 
