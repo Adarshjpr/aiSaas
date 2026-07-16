@@ -7,24 +7,28 @@ import org.springframework.stereotype.Service;
 
 import com.project.aiSaas.Dto.RequestDto.RequestUserDto;
 import com.project.aiSaas.Dto.ResponseDto.ResponseUserDto;
+import com.project.aiSaas.model.Enrollment;
 import com.project.aiSaas.model.Roles;
 import com.project.aiSaas.model.userModel;
+import com.project.aiSaas.repository.EnrollmentRepo;
 import com.project.aiSaas.repository.Repository;
 import com.project.aiSaas.service.servieInterface.UserInterface;
 import com.project.aiSaas.utilty.JwtService;
 
+import io.jsonwebtoken.Jwts.ENC;
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserLogic implements UserInterface {
 
     private final JwtService jwtService;
-    @Autowired
- private Repository repository;
+  
+ private final  Repository repository;
+ private final EnrollmentRepo enrollmentRepo;
 
 
-
-    UserLogic(JwtService jwtService) {
-        this.jwtService = jwtService;
-    }
+ 
 
 
 
@@ -54,7 +58,15 @@ public userModel entrollment( Integer id){
 
 
       userModel u = repository.findbyInegerId(id).orElseThrow(()-> new RuntimeException("id not found"));
-u.getEnrollment().setEntrollment("uc/26");
+if (u.getEnrollment() ==null) {
+    Enrollment e = Enrollment.builder().studentId(u).Entrollment("UC/26").build();
+    enrollmentRepo.save(e);
+    u.setEnrollment(e);
+}else{
+    System.out.println("  allready enrollment");
+}
+
+
     return  u;
 }
 
